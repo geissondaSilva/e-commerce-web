@@ -17,13 +17,13 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     children: [
 
-      { path: 'empresa', loadChildren: './modules/cadastros/empresa/empresa.module#EmpresaModule' },
+      { path: 'empresa', loadChildren: () => import('./modules/cadastros/empresa/empresa.module').then(m => m.EmpresaModule) },
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
